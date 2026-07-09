@@ -20,6 +20,8 @@
     --accent-purple-bg: #EEEDFE;
     --accent-teal: #0F6E56;
     --accent-teal-bg: #E1F5EE;
+    --accent-amber: #A15C07;
+    --accent-amber-bg: #FCEEDA;
     --badge-github-bg: #E8E6DF;
     --badge-github-text: #444441;
     --badge-local-bg: #E1F5EE;
@@ -113,6 +115,7 @@
 
   .icon-purple { background: var(--accent-purple-bg); color: var(--accent-purple); }
   .icon-teal { background: var(--accent-teal-bg); color: var(--accent-teal); }
+  .icon-amber { background: var(--accent-amber-bg); color: var(--accent-amber); }
 
   .badge {
     font-size: 11px;
@@ -213,6 +216,27 @@
       </div>
       <p class="card-title">헤이박스 판매량 계산기</p>
       <p class="card-desc">헤이박스 판매량 확인 및 계산</p>
+      <div class="card-footer">
+        <span class="open-btn">
+          열기
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+    <a class="card" href="https://dltmddn09.github.io/ops-tools/build-timeline/" target="_blank" rel="noopener">
+      <div class="card-top">
+        <div class="icon icon-amber">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <span class="badge badge-github">GitHub</span>
+      </div>
+      <p class="card-title">빌드 브랜치 타임라인</p>
+      <p class="card-desc">MAINLINE/BETA/ALPHA 브랜치·패치 일정 확인</p>
       <div class="card-footer">
         <span class="open-btn">
           열기
