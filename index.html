@@ -3,325 +3,244 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>내 업무 도구</title>
-<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600&display=swap" rel="stylesheet">
+<title>툴 모음</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #F5F4F0;
-    --surface: #FFFFFF;
-    --border: rgba(0,0,0,0.08);
-    --border-hover: rgba(0,0,0,0.16);
-    --text-primary: #1A1A1A;
-    --text-secondary: #6B6B6B;
-    --text-muted: #A0A0A0;
-    --accent-purple: #534AB7;
-    --accent-purple-bg: #EEEDFE;
-    --accent-teal: #0F6E56;
-    --accent-teal-bg: #E1F5EE;
-    --accent-amber: #A15C07;
-    --accent-amber-bg: #FCEEDA;
-    --accent-blue: #1D5486;
-    --accent-blue-bg: #E2EDF7;
-    --badge-github-bg: #E8E6DF;
-    --badge-github-text: #444441;
-    --badge-local-bg: #E1F5EE;
-    --badge-local-text: #0F6E56;
+    --bar: #2B3A55;
+    --bar-text: #FFFFFF;
+    --bg: #EEF0F3;
+    --panel: #FFFFFF;
+    --line: #D5D9E0;
+    --line-strong: #B8BFCA;
+    --head-bg: #F4F5F7;
+    --group-bg: #DDE3EC;
+    --text: #222222;
+    --sub: #666666;
+    --muted: #999999;
+    --link: #1F4E9C;
+    --hit: #FFF3B0;
   }
 
   body {
-    font-family: 'Pretendard', -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text-primary);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1.5rem;
-  }
-
-  .container {
-    width: 100%;
-    max-width: 640px;
-  }
-
-  header {
-    margin-bottom: 2rem;
-  }
-
-  header h1 {
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-    letter-spacing: -0.3px;
-  }
-
-  header p {
-    font-size: 14px;
-    color: var(--text-secondary);
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  @media (max-width: 480px) {
-    .grid { grid-template-columns: 1fr; }
-  }
-
-  .card {
-    background: var(--surface);
-    border: 0.5px solid var(--border);
-    border-radius: 14px;
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-decoration: none;
-    color: inherit;
-    transition: border-color 0.15s, transform 0.12s, box-shadow 0.15s;
-    cursor: pointer;
-  }
-
-  .card:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-  }
-
-  .card:active {
-    transform: translateY(0px);
-    box-shadow: none;
-  }
-
-  .card-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-
-  .icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-  }
-
-  .icon-purple { background: var(--accent-purple-bg); color: var(--accent-purple); }
-  .icon-teal { background: var(--accent-teal-bg); color: var(--accent-teal); }
-  .icon-amber { background: var(--accent-amber-bg); color: var(--accent-amber); }
-  .icon-blue { background: var(--accent-blue-bg); color: var(--accent-blue); }
-
-  .badge {
-    font-size: 11px;
-    font-weight: 500;
-    padding: 3px 9px;
-    border-radius: 20px;
-  }
-
-  .badge-github { background: var(--badge-github-bg); color: var(--badge-github-text); }
-  .badge-local  { background: var(--badge-local-bg);  color: var(--badge-local-text);  }
-
-  .card-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text-primary);
-    letter-spacing: -0.2px;
-  }
-
-  .card-desc {
+    font-family: 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;
     font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    flex: 1;
+    color: var(--text);
+    background: var(--bg);
   }
 
-  .card-footer {
+  .topbar {
+    background: var(--bar);
+    color: var(--bar-text);
+    height: 44px;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    padding-top: 10px;
-    border-top: 0.5px solid var(--border);
+    padding: 0 20px;
   }
+  .topbar h1 { font-size: 15px; font-weight: bold; }
 
-  .open-btn {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-secondary);
+  .wrap { max-width: 980px; margin: 16px auto; padding: 0 16px; }
+
+  .panel { background: var(--panel); border: 1px solid var(--line); }
+
+  .toolbar {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
   }
-
-  .open-btn svg {
-    width: 13px;
-    height: 13px;
-    opacity: 0.6;
+  .toolbar label { color: var(--sub); }
+  .toolbar input[type=text] {
+    width: 260px;
+    height: 28px;
+    padding: 0 8px;
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    font: inherit;
   }
+  .toolbar input[type=text]:focus { outline: none; border-color: var(--bar); }
+  .toolbar select {
+    height: 28px;
+    padding: 0 4px;
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    font: inherit;
+    background: #fff;
+  }
+  .toolbar .count { margin-left: auto; color: var(--sub); }
 
-  footer {
-    margin-top: 1.75rem;
-    font-size: 12px;
-    color: var(--text-muted);
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  th, td {
+    border-bottom: 1px solid var(--line);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  th { background: var(--head-bg); font-weight: bold; color: #444; border-bottom-color: var(--line-strong); }
+  col.c-name { width: 230px; }
+  col.c-cycle { width: 100px; }
+  col.c-open { width: 96px; }
+
+  tbody tr.row { cursor: pointer; }
+  tbody tr.row td { padding: 16px 14px; font-size: 14px; }
+
+  tr.gap td { height: 14px; padding: 0; background: var(--bg); border-bottom: 0; }
+  tr.group td {
+    background: var(--group-bg);
+    border-top: 2px solid var(--bar);
+    border-bottom: 1px solid var(--line-strong);
+    font-weight: bold;
+    color: var(--bar);
+    font-size: 14px;
+    padding: 9px 14px;
+  }
+  tr.group .n { margin-left: 6px; font-weight: normal; color: var(--sub); }
+  tbody tr.row:hover td { background: #F7F9FC; }
+  tbody tr.row.sel td { background: #EAF1FB; }
+
+  tbody tr.row td.name { font-size: 16px; }
+  td.name a { color: var(--link); font-weight: bold; text-decoration: none; }
+  tr.row:hover td.name a { text-decoration: underline; }
+  td.open { text-align: center; }
+  .btn-open {
+    display: inline-block;
+    width: 64px;
+    height: 32px;
+    line-height: 30px;
+    border: 1px solid var(--bar);
+    border-radius: 2px;
+    background: #fff;
+    color: var(--bar);
+    font-weight: bold;
     text-align: center;
+    text-decoration: none;
+  }
+  tr.row:hover .btn-open, tr.row.sel .btn-open { background: var(--bar); color: #fff; }
+  td.desc { color: var(--text); white-space: normal; }
+  td.cycle { color: var(--sub); }
+  mark { background: var(--hit); color: inherit; }
+
+  .empty td { text-align: center; color: var(--muted); padding: 24px; }
+
+  .foot { margin-top: 8px; color: var(--muted); font-size: 12px; }
+
+  @media (max-width: 640px) {
+    col.c-name { width: 150px; }
+    col.c-cycle, th.cycle, td.cycle { display: none; }
+    col.c-open { width: 80px; }
+    .toolbar { flex-wrap: wrap; }
+    .toolbar input[type=text] { width: 100%; }
   }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <h1>내 업무 도구</h1>
-    <p>자주 쓰는 도구 모음</p>
-  </header>
+<div class="topbar"><h1>툴 모음</h1></div>
 
-  <div class="grid">
-
-    <a class="card" href="https://dltmddn09.github.io/ops-tools/patchnote-converter/" target="_blank" rel="noopener">
-      <div class="card-top">
-        <div class="icon icon-purple">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/>
-            <line x1="9" y1="9" x2="10" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/>
-          </svg>
-        </div>
-        <span class="badge badge-github">GitHub</span>
-      </div>
-      <p class="card-title">패치노트 변환기</p>
-      <p class="card-desc">패치노트를 원하는 형식으로 변환</p>
-      <div class="card-footer">
-        <span class="open-btn">
-          열기
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-          </svg>
-        </span>
-      </div>
-    </a>
-
-    <a class="card" href="https://dltmddn09.github.io/ops-tools/heybox-calculator/" target="_blank" rel="noopener">
-      <div class="card-top">
-        <div class="icon icon-teal">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-            <polyline points="7 10 12 15 17 10"/>
-          </svg>
-        </div>
-        <span class="badge badge-github">GitHub</span>
-      </div>
-      <p class="card-title">헤이박스 판매량 계산기</p>
-      <p class="card-desc">헤이박스 판매량 확인 및 계산</p>
-      <div class="card-footer">
-        <span class="open-btn">
-          열기
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-          </svg>
-        </span>
-      </div>
-    </a>
-
-    <a class="card" href="https://dltmddn09.github.io/launcher/monitor/" target="_blank" rel="noopener">
-      <div class="card-top">
-        <div class="icon icon-blue">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            <polyline points="7 12 10 9 13 12 17 8"/>
-          </svg>
-        </div>
-        <span class="badge badge-github">GitHub</span>
-      </div>
-      <p class="card-title">종토방 모니터링</p>
-      <p class="card-desc">펄어비스 종목토론방 화제글·본문 검색 (매시 갱신)</p>
-      <div class="card-footer">
-        <span class="open-btn">
-          열기
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-          </svg>
-        </span>
-      </div>
-    </a>
-
-    <a class="card" href="https://dltmddn09.github.io/ops-tools/notice-search/" target="_blank" rel="noopener">
-      <div class="card-top">
-        <div class="icon icon-amber">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-            <line x1="8" y1="9" x2="14" y2="9"/><line x1="8" y1="13" x2="12" y2="13"/>
-          </svg>
-        </div>
-        <span class="badge badge-github">GitHub</span>
-      </div>
-      <p class="card-title">공지 검색</p>
-      <p class="card-desc">붉은사막 공홈 업데이트·공지사항 전문 검색 (매주 월 갱신)</p>
-      <div class="card-footer">
-        <span class="open-btn">
-          열기
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-          </svg>
-        </span>
-      </div>
-    </a>
-
-    <a class="card" href="https://dltmddn09.github.io/ops-tools/srt-generator/" target="_blank" rel="noopener">
-      <div class="card-top">
-        <div class="icon icon-purple">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <line x1="6" y1="12" x2="10" y2="12"/><line x1="13" y1="12" x2="18" y2="12"/>
-            <line x1="6" y1="16" x2="15" y2="16"/>
-          </svg>
-        </div>
-        <span class="badge badge-github">GitHub</span>
-      </div>
-      <p class="card-title">다국어 SRT 생성기</p>
-      <p class="card-desc">완성 SRT 시간에 번역 엑셀을 채워 언어별 SRT 만들기</p>
-      <div class="card-footer">
-        <span class="open-btn">
-          열기
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-          </svg>
-        </span>
-      </div>
-    </a>
-
-    <a class="card" href="https://mate8787.github.io/tools/notice-converter/" target="_blank" rel="noopener">
-      <div class="card-top">
-        <div class="icon icon-teal">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/>
-            <path d="M16 9a4 4 0 0 1 0 6"/><path d="M19 6a8 8 0 0 1 0 12"/>
-          </svg>
-        </div>
-        <span class="badge badge-github">GitHub</span>
-      </div>
-      <p class="card-title">공지/dm 툴</p>
-      <p class="card-desc">공지 HTML에 번역 표를 붙여 언어별 소스 만들기</p>
-      <div class="card-footer">
-        <span class="open-btn">
-          열기
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-          </svg>
-        </span>
-      </div>
-    </a>
-
+<div class="wrap">
+  <div class="panel">
+    <div class="toolbar">
+      <label for="q">검색</label>
+      <input type="text" id="q" placeholder="툴 이름·설명 ( / 키로 이동 )" autocomplete="off">
+      <select id="cat" aria-label="구분"></select>
+      <span class="count" id="count"></span>
+    </div>
+    <table>
+      <colgroup><col class="c-name"><col><col class="c-cycle"><col class="c-open"></colgroup>
+      <thead><tr><th>툴 이름</th><th>설명</th><th class="cycle">갱신</th><th></th></tr></thead>
+      <tbody id="list"></tbody>
+    </table>
   </div>
-
-  <footer>도구를 추가하려면 HTML 파일을 직접 수정하세요</footer>
+  <p class="foot">검색 후 Enter: 선택된 툴 열기 · ↑↓: 선택 이동</p>
 </div>
 
+<script>
+// 툴을 추가할 때는 이 목록에 한 줄만 넣으면 된다. 구분이 새 이름이면 그룹이 새로 생긴다.
+const TOOLS = [
+  { cat: '공지·패치노트', name: '패치노트 변환기', desc: '패치노트 코드 변환', cycle: '', url: 'https://dltmddn09.github.io/ops-tools/patchnote-converter/' },
+  { cat: '공지·패치노트', name: '공지 검색', desc: '붉은사막 공홈 공지 전문 검색', cycle: '매주 월', url: 'https://dltmddn09.github.io/ops-tools/notice-search/' },
+  { cat: '공지·패치노트', name: '공지/dm 툴', desc: '공지 HTML에 번역 표를 붙여 언어별 소스 만들기', cycle: '', url: 'https://mate8787.github.io/tools/notice-converter/' },
+  { cat: '번역·자막', name: '다국어 SRT 생성기', desc: '완성된 SRT 하나를 업로드하고, 타언어 SRT 생성하기', cycle: '', url: 'https://dltmddn09.github.io/ops-tools/srt-generator/' },
+  { cat: '모니터링·데이터', name: '종토방 모니터링', desc: '펄어비스 종목토론방 화제글·본문 검색', cycle: '2시간', url: 'https://dltmddn09.github.io/launcher/monitor/' },
+  { cat: '모니터링·데이터', name: '헤이박스 판매량 계산기', desc: '헤이박스 판매량 확인 및 계산', cycle: '', url: 'https://dltmddn09.github.io/ops-tools/heybox-calculator/' },
+];
+
+const $q = document.getElementById('q');
+const $cat = document.getElementById('cat');
+const $list = document.getElementById('list');
+const $count = document.getElementById('count');
+let shown = [];
+let sel = 0;
+
+const cats = [...new Set(TOOLS.map(t => t.cat))];
+$cat.innerHTML = '<option value="">전체 구분</option>' + cats.map(c => `<option>${c}</option>`).join('');
+
+function esc(s) {
+  return s.replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+}
+function hl(s, q) {
+  if (!q) return esc(s);
+  const i = s.toLowerCase().indexOf(q);
+  if (i < 0) return esc(s);
+  return esc(s.slice(0, i)) + '<mark>' + esc(s.slice(i, i + q.length)) + '</mark>' + esc(s.slice(i + q.length));
+}
+
+function render() {
+  const q = $q.value.trim().toLowerCase();
+  const c = $cat.value;
+  shown = TOOLS.filter(t =>
+    (!c || t.cat === c) &&
+    (!q || (t.name + ' ' + t.desc).toLowerCase().includes(q))
+  );
+  if (sel >= shown.length) sel = 0;
+
+  const perCat = {};
+  shown.forEach(t => { perCat[t.cat] = (perCat[t.cat] || 0) + 1; });
+
+  let html = '';
+  let last = null;
+  shown.forEach((t, i) => {
+    if (t.cat !== last) {
+      if (last !== null) html += '<tr class="gap"><td colspan="4"></td></tr>';
+      html += `<tr class="group"><td colspan="4">${esc(t.cat)}<span class="n">${perCat[t.cat]}</span></td></tr>`;
+      last = t.cat;
+    }
+    html += `<tr class="row${q && i === sel ? ' sel' : ''}" data-i="${i}">
+      <td class="name"><a href="${esc(t.url)}" target="_blank" rel="noopener">${hl(t.name, q)}</a></td>
+      <td class="desc">${hl(t.desc, q)}</td>
+      <td class="cycle">${t.cycle ? esc(t.cycle) : '-'}</td>
+      <td class="open"><a class="btn-open" href="${esc(t.url)}" target="_blank" rel="noopener">열기</a></td>
+    </tr>`;
+  });
+  $list.innerHTML = html || '<tr class="empty"><td colspan="4">검색 결과가 없습니다.</td></tr>';
+  $count.textContent = (q || c) ? `${shown.length} / ${TOOLS.length}개` : `전체 ${TOOLS.length}개`;
+}
+
+// 행 아무 곳이나 눌러도 열린다 (링크를 직접 누른 경우는 링크가 처리)
+$list.addEventListener('click', e => {
+  const tr = e.target.closest('tr.row');
+  if (!tr || e.target.closest('a')) return;
+  window.open(shown[tr.dataset.i].url, '_blank', 'noopener');
+});
+
+$q.addEventListener('input', () => { sel = 0; render(); });
+$cat.addEventListener('change', render);
+$q.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown') { sel = Math.min(sel + 1, shown.length - 1); render(); e.preventDefault(); }
+  else if (e.key === 'ArrowUp') { sel = Math.max(sel - 1, 0); render(); e.preventDefault(); }
+  else if (e.key === 'Enter' && shown[sel]) { window.open(shown[sel].url, '_blank', 'noopener'); }
+  else if (e.key === 'Escape') { $q.value = ''; render(); }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement !== $q) { e.preventDefault(); $q.focus(); }
+});
+
+render();
+</script>
 </body>
 </html>
