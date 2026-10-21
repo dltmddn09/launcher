@@ -4,163 +4,181 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>툴 모음</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bar: #2B3A55;
-    --bar-text: #FFFFFF;
-    --bg: #EEF0F3;
-    --panel: #FFFFFF;
-    --line: #D5D9E0;
-    --line-strong: #B8BFCA;
-    --head-bg: #F4F5F7;
-    --group-bg: #DDE3EC;
-    --text: #222222;
-    --sub: #666666;
-    --muted: #999999;
-    --link: #1F4E9C;
-    --hit: #FFF3B0;
+    --bg: #F1F2F5;
+    --ink: #1E2433;
+    --sub: #5F6675;
+    --muted: #9AA0AC;
+    --line: #DCDFE6;
+    --bubble: #FFFFFF;
+    /* 구분별 색: 순서대로 배정된다 */
+    --c0: #2F4B8F;
+    --c1: #1D7A6C;
+    --c2: #B0591A;
+    --c3: #7A3E9D;
+    --c4: #A23B54;
   }
 
+  html, body { height: 100%; }
   body {
-    font-family: 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif;
-    font-size: 13px;
-    color: var(--text);
+    font-family: 'Pretendard', 'Malgun Gothic', sans-serif;
+    color: var(--ink);
     background: var(--bg);
+    background-image: radial-gradient(rgba(30,36,51,0.07) 1px, transparent 1px);
+    background-size: 22px 22px;
+    overflow-x: hidden;
   }
 
-  .topbar {
-    background: var(--bar);
-    color: var(--bar-text);
-    height: 44px;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-  }
-  .topbar h1 { font-size: 15px; font-weight: bold; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 44px 24px 60px; }
 
-  .wrap { max-width: 980px; margin: 16px auto; padding: 0 16px; }
+  header { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  header h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; }
+  header h1 small { font-size: 14px; font-weight: 500; color: var(--muted); margin-left: 8px; letter-spacing: 0; }
 
-  .panel { background: var(--panel); border: 1px solid var(--line); }
-
-  .toolbar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--line);
-  }
-  .toolbar label { color: var(--sub); }
-  .toolbar input[type=text] {
-    width: 260px;
-    height: 28px;
-    padding: 0 8px;
-    border: 1px solid var(--line-strong);
-    border-radius: 2px;
-    font: inherit;
-  }
-  .toolbar input[type=text]:focus { outline: none; border-color: var(--bar); }
-  .toolbar select {
-    height: 28px;
-    padding: 0 4px;
-    border: 1px solid var(--line-strong);
-    border-radius: 2px;
-    font: inherit;
+  .search {
+    width: 280px;
+    height: 38px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: 19px;
     background: #fff;
-  }
-  .toolbar .count { margin-left: auto; color: var(--sub); }
-
-  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-  th, td {
-    border-bottom: 1px solid var(--line);
-    padding: 8px 10px;
-    text-align: left;
-    vertical-align: middle;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  th { background: var(--head-bg); font-weight: bold; color: #444; border-bottom-color: var(--line-strong); }
-  col.c-name { width: 230px; }
-  col.c-cycle { width: 100px; }
-  col.c-open { width: 96px; }
-
-  tbody tr.row { cursor: pointer; }
-  tbody tr.row td { padding: 16px 14px; font-size: 14px; }
-
-  tr.gap td { height: 14px; padding: 0; background: var(--bg); border-bottom: 0; }
-  tr.group td {
-    background: var(--group-bg);
-    border-top: 2px solid var(--bar);
-    border-bottom: 1px solid var(--line-strong);
-    font-weight: bold;
-    color: var(--bar);
+    font: inherit;
     font-size: 14px;
-    padding: 9px 14px;
+    color: var(--ink);
   }
-  tr.group .n { margin-left: 6px; font-weight: normal; color: var(--sub); }
-  tbody tr.row:hover td { background: #F7F9FC; }
-  tbody tr.row.sel td { background: #EAF1FB; }
+  .search:focus { outline: none; border-color: var(--c0); }
 
-  tbody tr.row td.name { font-size: 16px; }
-  td.name a { color: var(--link); font-weight: bold; text-decoration: none; }
-  tr.row:hover td.name a { text-decoration: underline; }
-  td.open { text-align: center; }
-  .btn-open {
-    display: inline-block;
-    width: 64px;
-    height: 32px;
-    line-height: 30px;
-    border: 1px solid var(--bar);
-    border-radius: 2px;
-    background: #fff;
-    color: var(--bar);
-    font-weight: bold;
-    text-align: center;
+  .cats { display: flex; gap: 20px; margin: 22px 0 10px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .cats button {
+    background: none;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    padding: 0 0 9px;
+    margin-bottom: -1px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cats button i { width: 8px; height: 8px; border-radius: 50%; background: var(--k, var(--ink)); }
+  .cats button:hover { color: var(--sub); }
+  .cats button.on { color: var(--ink); border-bottom-color: var(--k, var(--ink)); }
+
+  .field {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px 34px;
+    padding-top: 34px;
+  }
+
+  /* 바깥: 커서 반응(JS) / 안쪽: 둥실 떠다니기(CSS) — transform이 겹치지 않게 나눔 */
+  .bubble {
+    display: block;
     text-decoration: none;
+    color: inherit;
+    will-change: transform;
+    transition: opacity .35s, filter .35s;
+    outline: none;
   }
-  tr.row:hover .btn-open, tr.row.sel .btn-open { background: var(--bar); color: #fff; }
-  td.desc { color: var(--text); white-space: normal; }
-  td.cycle { color: var(--sub); }
-  mark { background: var(--hit); color: inherit; }
+  .float {
+    animation: bob var(--dur, 6s) ease-in-out var(--delay, 0s) infinite alternate;
+    transform: translate(var(--dx, 0px), var(--dy, 0px));
+  }
+  @keyframes bob {
+    from { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(var(--r0, -0.6deg)); }
+    to   { transform: translate(calc(var(--dx, 0px) + 4px), calc(var(--dy, 0px) - 10px)) rotate(var(--r1, 0.6deg)); }
+  }
 
-  .empty td { text-align: center; color: var(--muted); padding: 24px; }
+  .body {
+    position: relative;
+    background: var(--bubble);
+    border: 1.5px solid var(--line);
+    border-radius: 20px;
+    padding: 20px 22px 18px;
+    box-shadow: 0 6px 18px rgba(30,36,51,0.06);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  /* 말풍선 꼬리 */
+  .body::after {
+    content: '';
+    position: absolute;
+    bottom: -9px;
+    left: 34px;
+    width: 16px;
+    height: 16px;
+    background: var(--bubble);
+    border-right: 1.5px solid var(--line);
+    border-bottom: 1.5px solid var(--line);
+    border-bottom-right-radius: 4px;
+    transform: rotate(45deg);
+    transition: border-color .2s;
+  }
+  .bubble.tail-r .body::after { left: auto; right: 34px; }
 
-  .foot { margin-top: 8px; color: var(--muted); font-size: 12px; }
+  .cat { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--k); }
+  .cat i { width: 7px; height: 7px; border-radius: 50%; background: var(--k); }
+  .name { display: block; font-size: 19px; font-weight: 700; letter-spacing: -0.4px; margin: 8px 0 6px; transition: color .2s; }
+  .desc { display: block; font-size: 14px; line-height: 1.55; color: var(--sub); }
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .go { font-size: 13px; font-weight: 600; color: var(--k); opacity: 0; transform: translateX(-6px); transition: opacity .2s, transform .2s; }
+
+  .bubble:hover .body, .bubble.sel .body, .bubble:focus-visible .body {
+    border-color: var(--k);
+    box-shadow: 0 14px 34px rgba(30,36,51,0.14);
+  }
+  .bubble:hover .body::after, .bubble.sel .body::after, .bubble:focus-visible .body::after { border-color: var(--k); }
+  .bubble:hover .name, .bubble.sel .name { color: var(--k); }
+  .bubble:hover .go, .bubble.sel .go, .bubble:focus-visible .go { opacity: 1; transform: none; }
+
+  .bubble.dim { opacity: 0.15; filter: grayscale(1); pointer-events: none; }
+
+  mark { background: #FFE98A; color: inherit; border-radius: 2px; }
+
+  .empty { display: none; text-align: center; color: var(--muted); padding: 60px 0 20px; font-size: 14px; }
+  .empty.on { display: block; }
+
+  .foot { margin-top: 44px; font-size: 12px; color: var(--muted); }
 
   @media (max-width: 640px) {
-    col.c-name { width: 150px; }
-    col.c-cycle, th.cycle, td.cycle { display: none; }
-    col.c-open { width: 80px; }
-    .toolbar { flex-wrap: wrap; }
-    .toolbar input[type=text] { width: 100%; }
+    .wrap { padding: 28px 16px 40px; }
+    .search { width: 100%; }
+    .field { grid-template-columns: 1fr; gap: 26px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .float { animation: none; }
   }
 </style>
 </head>
 <body>
 
-<div class="topbar"><h1>툴 모음</h1></div>
-
 <div class="wrap">
-  <div class="panel">
-    <div class="toolbar">
-      <label for="q">검색</label>
-      <input type="text" id="q" placeholder="툴 이름·설명 ( / 키로 이동 )" autocomplete="off">
-      <select id="cat" aria-label="구분"></select>
-      <span class="count" id="count"></span>
-    </div>
-    <table>
-      <colgroup><col class="c-name"><col><col class="c-cycle"><col class="c-open"></colgroup>
-      <thead><tr><th>툴 이름</th><th>설명</th><th class="cycle">갱신</th><th></th></tr></thead>
-      <tbody id="list"></tbody>
-    </table>
-  </div>
-  <p class="foot">검색 후 Enter: 선택된 툴 열기 · ↑↓: 선택 이동</p>
+  <header>
+    <h1>툴 모음<small id="count"></small></h1>
+    <input class="search" id="q" type="text" placeholder="검색  ( / 키 )" autocomplete="off">
+  </header>
+  <nav class="cats" id="cats"></nav>
+  <main class="field" id="field"></main>
+  <p class="empty" id="empty">검색 결과가 없습니다.</p>
+  <p class="foot">검색 후 Enter로 첫 번째 툴 열기 · Esc로 지우기</p>
 </div>
 
 <script>
-// 툴을 추가할 때는 이 목록에 한 줄만 넣으면 된다. 구분이 새 이름이면 그룹이 새로 생긴다.
+// 툴을 추가할 때는 이 목록에 한 줄만 넣으면 된다. 구분이 새 이름이면 탭과 색이 새로 생긴다.
 const TOOLS = [
   { cat: '공지·패치노트', name: '패치노트 변환기', desc: '패치노트 코드 변환', cycle: '', url: 'https://dltmddn09.github.io/ops-tools/patchnote-converter/' },
   { cat: '공지·패치노트', name: '공지 검색', desc: '공식 홈페이지 공지 전문 검색', cycle: '매주 월', url: 'https://dltmddn09.github.io/ops-tools/notice-search/' },
@@ -171,76 +189,130 @@ const TOOLS = [
 ];
 
 const $q = document.getElementById('q');
-const $cat = document.getElementById('cat');
-const $list = document.getElementById('list');
+const $cats = document.getElementById('cats');
+const $field = document.getElementById('field');
+const $empty = document.getElementById('empty');
 const $count = document.getElementById('count');
-let shown = [];
-let sel = 0;
 
 const cats = [...new Set(TOOLS.map(t => t.cat))];
-$cat.innerHTML = '<option value="">전체 구분</option>' + cats.map(c => `<option>${c}</option>`).join('');
+const color = c => `var(--c${cats.indexOf(c) % 5})`;
+let curCat = '';
 
 function esc(s) {
   return s.replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
 }
 function hl(s, q) {
-  if (!q) return esc(s);
-  const i = s.toLowerCase().indexOf(q);
+  const i = q ? s.toLowerCase().indexOf(q) : -1;
   if (i < 0) return esc(s);
   return esc(s.slice(0, i)) + '<mark>' + esc(s.slice(i, i + q.length)) + '</mark>' + esc(s.slice(i + q.length));
 }
-
-function render() {
-  const q = $q.value.trim().toLowerCase();
-  const c = $cat.value;
-  shown = TOOLS.filter(t =>
-    (!c || t.cat === c) &&
-    (!q || (t.name + ' ' + t.desc).toLowerCase().includes(q))
-  );
-  if (sel >= shown.length) sel = 0;
-
-  const perCat = {};
-  shown.forEach(t => { perCat[t.cat] = (perCat[t.cat] || 0) + 1; });
-
-  let html = '';
-  let last = null;
-  shown.forEach((t, i) => {
-    if (t.cat !== last) {
-      if (last !== null) html += '<tr class="gap"><td colspan="4"></td></tr>';
-      html += `<tr class="group"><td colspan="4">${esc(t.cat)}<span class="n">${perCat[t.cat]}</span></td></tr>`;
-      last = t.cat;
-    }
-    html += `<tr class="row${q && i === sel ? ' sel' : ''}" data-i="${i}">
-      <td class="name"><a href="${esc(t.url)}" target="_blank" rel="noopener">${hl(t.name, q)}</a></td>
-      <td class="desc">${hl(t.desc, q)}</td>
-      <td class="cycle">${t.cycle ? esc(t.cycle) : '-'}</td>
-      <td class="open"><a class="btn-open" href="${esc(t.url)}" target="_blank" rel="noopener">열기</a></td>
-    </tr>`;
-  });
-  $list.innerHTML = html || '<tr class="empty"><td colspan="4">검색 결과가 없습니다.</td></tr>';
-  $count.textContent = (q || c) ? `${shown.length} / ${TOOLS.length}개` : `전체 ${TOOLS.length}개`;
+// 새로고침해도 같은 자리에 뜨도록 이름으로 고정된 난수를 쓴다
+function seeded(str) {
+  let h = 2166136261;
+  for (const ch of str) h = Math.imul(h ^ ch.codePointAt(0), 16777619);
+  return () => ((h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0) % 10000) / 10000;
 }
 
-// 행 아무 곳이나 눌러도 열린다 (링크를 직접 누른 경우는 링크가 처리)
-$list.addEventListener('click', e => {
-  const tr = e.target.closest('tr.row');
-  if (!tr || e.target.closest('a')) return;
-  window.open(shown[tr.dataset.i].url, '_blank', 'noopener');
+// 탭
+$cats.innerHTML = [['', '전체', 'var(--ink)'], ...cats.map(c => [c, c, color(c)])]
+  .map(([v, label, k]) => `<button type="button" data-cat="${esc(v)}" style="--k:${k}"${v ? '' : ' class="on"'}>${v ? '<i></i>' : ''}${esc(label)}</button>`)
+  .join('');
+$cats.addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  curCat = b.dataset.cat;
+  $cats.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+  apply();
 });
 
-$q.addEventListener('input', () => { sel = 0; render(); });
-$cat.addEventListener('change', render);
+// 말풍선
+$field.innerHTML = TOOLS.map((t, i) => {
+  const r = seeded(t.name);
+  const style = [
+    `--k:${color(t.cat)}`,
+    `--dx:${(r() * 16 - 8).toFixed(1)}px`,
+    `--dy:${(r() * 22 - 6).toFixed(1)}px`,
+    `--dur:${(5 + r() * 3).toFixed(2)}s`,
+    `--delay:-${(r() * 6).toFixed(2)}s`,
+    `--r0:${(-r() * 1.2).toFixed(2)}deg`,
+    `--r1:${(r() * 1.2).toFixed(2)}deg`,
+  ].join(';');
+  return `<a class="bubble${i % 2 ? ' tail-r' : ''}" data-i="${i}" href="${esc(t.url)}" target="_blank" rel="noopener" style="${style}">
+    <div class="float"><div class="body">
+      <span class="cat"><i></i>${esc(t.cat)}</span>
+      <strong class="name">${esc(t.name)}</strong>
+      <span class="desc">${esc(t.desc)}</span>
+      <span class="meta"><span>${t.cycle ? '갱신 ' + esc(t.cycle) : ''}</span><span class="go">열기 →</span></span>
+    </div></div>
+  </a>`;
+}).join('');
+const bubbles = [...$field.querySelectorAll('.bubble')];
+
+let first = null;
+function apply() {
+  const q = $q.value.trim().toLowerCase();
+  let n = 0;
+  first = null;
+  bubbles.forEach((el, i) => {
+    const t = TOOLS[i];
+    const ok = (!curCat || t.cat === curCat) && (!q || (t.name + ' ' + t.desc).toLowerCase().includes(q));
+    el.classList.toggle('dim', !ok);
+    el.classList.remove('sel');
+    el.querySelector('.name').innerHTML = hl(t.name, q);
+    el.querySelector('.desc').innerHTML = hl(t.desc, q);
+    if (ok) { n++; if (!first) first = el; }
+  });
+  if (q && first) first.classList.add('sel');
+  $empty.classList.toggle('on', n === 0);
+  $count.textContent = (q || curCat) ? `${n} / ${TOOLS.length}` : `${TOOLS.length}`;
+}
+
+$q.addEventListener('input', apply);
 $q.addEventListener('keydown', e => {
-  if (e.key === 'ArrowDown') { sel = Math.min(sel + 1, shown.length - 1); render(); e.preventDefault(); }
-  else if (e.key === 'ArrowUp') { sel = Math.max(sel - 1, 0); render(); e.preventDefault(); }
-  else if (e.key === 'Enter' && shown[sel]) { window.open(shown[sel].url, '_blank', 'noopener'); }
-  else if (e.key === 'Escape') { $q.value = ''; render(); }
+  if (e.key === 'Enter' && first) window.open(TOOLS[first.dataset.i].url, '_blank', 'noopener');
+  else if (e.key === 'Escape') { $q.value = ''; apply(); }
 });
 document.addEventListener('keydown', e => {
   if (e.key === '/' && document.activeElement !== $q) { e.preventDefault(); $q.focus(); }
 });
 
-render();
+// 커서 반응: 가까운 말풍선이 커서 쪽으로 살짝 끌려오고, 올라간 말풍선은 커진다
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches || matchMedia('(hover: none)').matches;
+if (!still) {
+  const RANGE = 220, PULL = 14;
+  const state = bubbles.map(() => ({ x: 0, y: 0, s: 1, tx: 0, ty: 0, ts: 1 }));
+  let mx = -9999, my = -9999;
+  addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  document.addEventListener('mouseleave', () => { mx = my = -9999; });
+
+  (function tick() {
+    bubbles.forEach((el, i) => {
+      const st = state[i];
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2 - st.x;
+      const cy = rect.top + rect.height / 2 - st.y;
+      const dx = mx - cx, dy = my - cy;
+      const d = Math.hypot(dx, dy);
+      const hover = el.matches(':hover');
+      if (d < RANGE && !el.classList.contains('dim')) {
+        const f = (1 - d / RANGE) * PULL / Math.max(d, 1);
+        st.tx = dx * f; st.ty = dy * f;
+      } else {
+        st.tx = 0; st.ty = 0;
+      }
+      st.ts = hover ? 1.05 : 1;
+      st.x += (st.tx - st.x) * 0.12;
+      st.y += (st.ty - st.y) * 0.12;
+      st.s += (st.ts - st.s) * 0.15;
+      el.style.transform = `translate(${st.x.toFixed(2)}px, ${st.y.toFixed(2)}px) scale(${st.s.toFixed(3)})`;
+      el.style.zIndex = hover ? 2 : '';
+      el.style.position = 'relative';
+    });
+    requestAnimationFrame(tick);
+  })();
+}
+
+apply();
 </script>
 </body>
 </html>
